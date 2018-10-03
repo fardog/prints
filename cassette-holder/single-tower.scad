@@ -4,18 +4,20 @@
 // preview[view:south east, tilt:top diagonal]
 
 /* [Cassette] */
-number_of_cassettes = 10; //[5:15]
+number_of_cassettes = 2; //[5:15]
+x_tolerance = 1.5; //[1.0:3.0]
+y_tolerance = 1.0; //[1.0:3.0]
 
 /* [Hidden] */
-case_height = 108.7;
-case_width = 16.9;
-case_depth = 69.2;
+case_height = 109.0 + x_tolerance;
+case_width = 17.0 + y_tolerance;
+case_depth = 70.0;
 case_padding = 6;
 foot_height = 5;
 
 wall_thickness_min = 2;
 
-case_pocket_height = case_depth - (case_depth / 4);
+case_pocket_height = case_depth - (case_depth / 2);
 case_pocket_gap = wall_thickness_min;
 
 base_height = case_pocket_height + wall_thickness_min;
