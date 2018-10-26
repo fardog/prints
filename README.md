@@ -6,9 +6,11 @@ gcode is generated for a [Prusa i3 MK3][i3], from my [slic3r-presets][];
 settings are written into the gcode, so inspect the end of the files to see what
 settings they use.
 
+**Note:** I'm an OpenSCAD beginner; don't expect any gems here.
+
 ## License
 
-[MIT](./LICENSE)
+[Creative Commons Attribution (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/)
 
 Some models are released under different licenses, depending on their original
 source (if any). For those purposes, a `LICENSE` file in a given folder takes
