@@ -4,10 +4,10 @@
 // preview[view: south east, tilt: top diagonal]
 
 /* [Strainer] */
-strainer_x_mm = 2.0; //[1.0:10.0]
-strainer_y_mm = 2.0; //[1.0:10.0]
+strainer_x_mm = 3.0; //[1.0:10.0]
+strainer_y_mm = 3.0; //[1.0:10.0]
 strainer_thickness_mm = 2.0; //[1.0:3.0]
-strainer_grid_spacing_mm = 2.0; //[0.5:3.0]
+strainer_grid_spacing_mm = 1.0; //[0.5:3.0]
 
 /* [Drain] */
 drain_diameter_mm = 30.0; //[5.0:150.0]
@@ -36,10 +36,18 @@ module strainer() {
         }
         difference() {
             cylinder(h=strainer_thickness_mm, d=drain_diameter_mm);
-            translate([-drain_diameter_mm/2, -drain_diameter_mm/2, 0]) {
-                for (x = [0:strainer_x_mm+strainer_grid_spacing_mm:drain_diameter_mm]) {
+
+            x_size = strainer_x_mm + strainer_grid_spacing_mm;
+            x_total = ceil(drain_diameter_mm / x_size) * x_size;
+            x_offset = (x_total - strainer_grid_spacing_mm) / 2;
+            y_size = strainer_y_mm + strainer_grid_spacing_mm;
+            y_total = ceil(drain_diameter_mm / y_size) * y_size;
+            y_offset = (y_total - strainer_grid_spacing_mm) / 2;
+
+            translate([-x_offset, -y_offset, 0]) {
+                for (x = [0:x_size:drain_diameter_mm]) {
                     translate([x,0,0])
-                    for (y = [0:strainer_y_mm+strainer_grid_spacing_mm:drain_diameter_mm]) {
+                    for (y = [0:y_size:drain_diameter_mm]) {
                         translate([0, y, 0])
                             cube([strainer_x_mm, strainer_y_mm, strainer_thickness_mm]);
                     }
