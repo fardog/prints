@@ -4,6 +4,7 @@
 // preview[view: south east, tilt: top diagonal]
 
 /* [Strainer] */
+strainer_type = "square"; // [square: Square,circle: Circle]
 strainer_x_mm = 3.0; //[1.0:10.0]
 strainer_y_mm = 3.0; //[1.0:10.0]
 strainer_thickness_mm = 2.0; //[1.0:3.0]
@@ -21,11 +22,50 @@ skirt_thickness_mm = 2.0; //[1.0:3.0]
 
 /* [Hidden] */
 skirt_z_offset = drain_depth_mm - skirt_thickness_mm;
+circle_resolution = 10;
 
 module drain_sleeve() {
     difference() {
         cylinder(h=drain_depth_mm, d=drain_diameter_mm);
         cylinder(h=drain_depth_mm, d=drain_diameter_mm-drain_sleeve_thickness);
+    }
+}
+
+module strainer_square() {
+    x_size = strainer_x_mm + strainer_grid_spacing_mm;
+    x_total = ceil(drain_diameter_mm / x_size) * x_size;
+    x_offset = (x_total - strainer_grid_spacing_mm) / 2;
+    y_size = strainer_y_mm + strainer_grid_spacing_mm;
+    y_total = ceil(drain_diameter_mm / y_size) * y_size;
+    y_offset = (y_total - strainer_grid_spacing_mm) / 2;
+
+    translate([-x_offset, -y_offset, 0]) {
+        for (x = [0:x_size:drain_diameter_mm]) {
+            translate([x,0,0])
+            for (y = [0:y_size:drain_diameter_mm]) {
+                translate([0, y, 0])
+                    cube([strainer_x_mm, strainer_y_mm, strainer_thickness_mm]);
+            }
+        }
+    }
+}
+
+module strainer_circle() {
+    x_size = strainer_x_mm + strainer_grid_spacing_mm;
+    x_total = ceil(drain_diameter_mm / x_size) * x_size;
+    x_offset = (x_total) / 2;
+    y_size = strainer_y_mm + strainer_grid_spacing_mm;
+    y_total = ceil(drain_diameter_mm / y_size) * y_size;
+    y_offset = (y_total) / 2;
+
+    translate([-x_offset, -y_offset, 0]) {
+        for (x = [0:x_size:drain_diameter_mm]) {
+            translate([x,0,0])
+            for (y = [0:y_size:drain_diameter_mm]) {
+                translate([0, y, 0])
+                    cylinder(h=strainer_thickness_mm, d=strainer_x_mm, $fn=circle_resolution);
+            }
+        }
     }
 }
 
@@ -38,21 +78,10 @@ module strainer() {
         difference() {
             cylinder(h=strainer_thickness_mm, d=drain_diameter_mm);
 
-            x_size = strainer_x_mm + strainer_grid_spacing_mm;
-            x_total = ceil(drain_diameter_mm / x_size) * x_size;
-            x_offset = (x_total - strainer_grid_spacing_mm) / 2;
-            y_size = strainer_y_mm + strainer_grid_spacing_mm;
-            y_total = ceil(drain_diameter_mm / y_size) * y_size;
-            y_offset = (y_total - strainer_grid_spacing_mm) / 2;
-
-            translate([-x_offset, -y_offset, 0]) {
-                for (x = [0:x_size:drain_diameter_mm]) {
-                    translate([x,0,0])
-                    for (y = [0:y_size:drain_diameter_mm]) {
-                        translate([0, y, 0])
-                            cube([strainer_x_mm, strainer_y_mm, strainer_thickness_mm]);
-                    }
-                }
+            if (strainer_type == "square") {
+                strainer_square();
+            } else if (strainer_type == "circle") {
+                strainer_circle();
             }
         }
     }
