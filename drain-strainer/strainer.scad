@@ -16,6 +16,7 @@ drain_sleeve_thickness = 2.0; //[1.0:3.0]
 
 /* [Skirt] */
 skirt_diameter_mm = 40.0; //[5.0:200.0]
+skirt_upper_diameter_mm = 38.0; //[5.0:200.0]
 skirt_thickness_mm = 2.0; //[1.0:3.0]
 
 /* [Hidden] */
@@ -59,7 +60,7 @@ module strainer() {
 
 module skirt() {
     difference() {
-        cylinder(h=skirt_thickness_mm, d=skirt_diameter_mm);
+        cylinder(h=skirt_thickness_mm, d1=skirt_diameter_mm, d2=skirt_upper_diameter_mm);
         cylinder(h=skirt_thickness_mm, d=drain_diameter_mm);
     }
 }
