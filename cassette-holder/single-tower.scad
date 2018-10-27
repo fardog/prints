@@ -4,7 +4,7 @@
 // preview[view:south east, tilt:top diagonal]
 
 /* [Cassette] */
-number_of_cassettes = 2; //[5:15]
+number_of_cassettes = 10; //[5:15]
 x_tolerance = 1.5; //[1.0:3.0]
 y_tolerance = 1.0; //[1.0:3.0]
 
