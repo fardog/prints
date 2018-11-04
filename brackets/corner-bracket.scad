@@ -30,8 +30,6 @@ front_size = total_side - front_offset;
 screw_center = screw_head_mm / 2 + screw_offset_r_mm;
 screw_top = total_depth - screw_additional_inset;
 
-echo(total_depth);
-
 difference() {
     // body
     linear_extrude(total_depth)
