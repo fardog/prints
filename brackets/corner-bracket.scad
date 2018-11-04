@@ -6,20 +6,20 @@
 use <../lib/utils.scad>;
 
 /* [Object] */
-object_depth_mm = 10;
+object_depth_mm = 9.5;
 object_front_overlap_mm = 3;
 object_rear_overlap_mm = 12;
 
 /* [Screw] */
 screw_d_mm = 4;
 screw_inset_head = true;
-screw_additional_inset = 2;
+screw_additional_inset = 4;
 screw_head_angle = 82;
 screw_head_mm = 7;
 
 /* [Bracket] */
 thickness_mm = 3;
-screw_offset_r_mm = 0.5;
+screw_offset_r_mm = 1;
 
 /* [Hidden] */
 total_depth = object_depth_mm + thickness_mm * 2;
