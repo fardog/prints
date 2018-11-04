@@ -33,31 +33,25 @@ screw_top = total_depth - screw_additional_inset;
 difference() {
     // body
     linear_extrude(total_depth)
-        square([total_side, total_side]);
+        square(total_side);
     // object cutout
     translate([object_offset, object_offset, thickness_mm])
         union() {
             // main cutout
             linear_extrude(object_depth_mm)
-                square([object_rear_overlap_mm, object_rear_overlap_mm]);
+                square(object_rear_overlap_mm);
             // front cutout
             translate([object_front_overlap_mm, object_front_overlap_mm, object_depth_mm])
                 linear_extrude(thickness_mm)
                     square(object_rear_overlap_mm - object_front_overlap_mm);
         }
-    // screw holes
+    // screw hole
     translate([screw_center, screw_center, 0])
-    union() {
-        if (screw_inset_head) {
-            translate([0, 0, screw_top])
-                cone(screw_head_mm/2, screw_head_angle, false);
-        }
-        linear_extrude(total_depth)
-            circle(d=screw_d_mm, $fn=20);
-        if (screw_additional_inset > 0) {
-            translate([0, 0, screw_top])
-                linear_extrude(total_depth - screw_top)
-                    circle(d=screw_head_mm, $fn=20);
-        }
-    }
+        inset_screw(
+            d=screw_d_mm,
+            l=total_depth,
+            head_d=screw_head_mm,
+            angle=screw_head_angle,
+            inset=screw_additional_inset
+        );
 }
