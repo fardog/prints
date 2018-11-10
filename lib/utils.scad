@@ -58,3 +58,5 @@ module inset_screw(r, d, l, head, head_d, cap, angle, inset, $fn=20) {
                 circle(r=head_r);
     }
 }
+
+function inch_to_mm(inches) = inches * 25.4;
