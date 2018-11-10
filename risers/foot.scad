@@ -19,12 +19,12 @@ y_skew = 0;
 
 difference() {
     hull() {
-    linear_extrude(height + foot_inset)
-        offset(r=foot_offset)
+        linear_extrude(height + foot_inset)
+            offset(r=foot_offset)
+                roundrect([width, depth], radius);
+        rotate([x_skew, y_skew, 0])
+            linear_extrude(0.1)
             roundrect([width, depth], radius);
-    rotate([x_skew, y_skew, 0])
-        linear_extrude(0.1)
-        roundrect([width, depth], radius);
     }
     // foot cut
     translate([0, 0, height])
