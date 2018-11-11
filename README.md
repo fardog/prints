@@ -13,8 +13,9 @@ settings they use.
 [Creative Commons Attribution (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/)
 
 Some models are released under different licenses, depending on their original
-source (if any). For those purposes, a `LICENSE` file in a given folder takes
-precedence over the repos overall license.
+source (if any). For those purposes, a `LICENSE` file in a given folder, or a
+license header in a particular file takes precedence over the repos overall
+license.
 
 [OpenSCAD]: https://www.openscad.org/
 [i3]: https://www.prusa3d.com/original-prusa-i3-mk3/
