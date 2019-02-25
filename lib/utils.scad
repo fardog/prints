@@ -60,3 +60,4 @@ module inset_screw(r, d, l, head, head_d, cap, angle, inset, $fn=20) {
 }
 
 function inch_to_mm(inches) = inches * 25.4;
+function increase(vec, amt) = [for (i = vec) i + amt];
