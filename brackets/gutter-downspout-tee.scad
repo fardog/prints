@@ -5,10 +5,10 @@
 
 use <../lib/utils.scad>;
 
-downspout_w = inch_to_mm(3);
-downspout_h = inch_to_mm(2);
+downspout_w = inch_to_mm(3.2);
+downspout_h = inch_to_mm(2.3);
 downspout_t = 1.5;
-downspout_r = 5;
+downspout_r = inch_to_mm(0.5);
 
 insert_d = inch_to_mm(3.5);
 insert_allowance = 5;
