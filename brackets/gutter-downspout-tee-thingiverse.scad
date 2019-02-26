@@ -7,19 +7,19 @@ use <../lib/utils.scad>;
 
 /* [Downspout] */
 // width of downspout opening
-downspout_w = inch_to_mm(3.2);
+downspout_w = 81;
 // height of downspout opening
-downspout_h = inch_to_mm(2.3);
+downspout_h = 58.5;
 // downspout corner radius
-downspout_r = inch_to_mm(0.5);
+downspout_r = 12.7;
 
 /* [Adapter] */
 // depth of downspout inserts
-insert_d = inch_to_mm(3.5);
+insert_d = 89;
 // size to reduce downspout insert
 insert_allowance = 5;
 // depth of outer insert
-outer_d = inch_to_mm(2.5);
+outer_d = 63.5;
 // thickness of adapter
 thickness = 3;
 
@@ -27,12 +27,26 @@ thickness = 3;
 // diameter of screw holes
 screw_d = 4;
 // distance to offset screw holes from edges
-screw_offset = inch_to_mm(0.75);
+screw_offset = 19.0;
 
 /* [Hidden] */
 downspout_vec = [downspout_w, downspout_h];
 screw_l = downspout_h + thickness; 
 total_height = insert_d + outer_d + downspout_w/2;
+
+module roundrect(vect, r, $fn=20) {
+    sq = len(vect) > 1
+        ? [for (i = [0:1:len(vect)-1]) vect[i] - r * 2]
+        : vect - r * 2;
+    minkowski() {
+        square(sq);
+        translate([r, r])
+            circle(r=r);
+    }
+}
+
+function inch_to_mm(inches) = inches * 25.4;
+function increase(vec, amt) = [for (i = vec) i + amt];
 
 module adapt_allowance(vec) {
     hull() {
