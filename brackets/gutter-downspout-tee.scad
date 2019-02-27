@@ -7,17 +7,17 @@ use <../lib/utils.scad>;
 
 /* [Downspout] */
 // width of downspout opening
-downspout_w = inch_to_mm(3.2);
+downspout_w = inch_to_mm(3.35);
 // height of downspout opening
-downspout_h = inch_to_mm(2.3);
+downspout_h = inch_to_mm(2.45);
 // downspout corner radius
-downspout_r = inch_to_mm(0.5);
+downspout_r = inch_to_mm(0.6);
 
 /* [Adapter] */
 // depth of downspout inserts
-insert_d = inch_to_mm(3.5);
+insert_d = inch_to_mm(3.55);
 // size to reduce downspout insert
-insert_allowance = 5;
+insert_allowance = 10;
 // depth of outer insert
 outer_d = inch_to_mm(2.5);
 // thickness of adapter
