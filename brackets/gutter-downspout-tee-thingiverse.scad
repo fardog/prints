@@ -3,21 +3,19 @@
 
 // preview[view: south east, tilt: top diagonal]
 
-use <../lib/utils.scad>;
-
 /* [Downspout] */
 // width of downspout opening
-downspout_w = 81;
+downspout_w = 85;
 // height of downspout opening
-downspout_h = 58.5;
+downspout_h = 62.2;
 // downspout corner radius
-downspout_r = 12.7;
+downspout_r = 15.25;
 
 /* [Adapter] */
 // depth of downspout inserts
-insert_d = 89;
+insert_d = 90.2;
 // size to reduce downspout insert
-insert_allowance = 5;
+insert_allowance = 10;
 // depth of outer insert
 outer_d = 63.5;
 // thickness of adapter
