@@ -24,8 +24,10 @@ base_height = case_pocket_height + wall_thickness_min;
 base_depth = (case_width + case_pocket_gap) * number_of_cassettes + case_pocket_gap + foot_height;
 base_width = case_height + (case_padding * 2);
 
+echo(base_depth);
+
 module base() {
-	cube([base_width, base_depth, base_height]);
+	#cube([base_width, base_depth, base_height]);
 }
 
 module foot() {

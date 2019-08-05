@@ -22,6 +22,8 @@ insert_allowance = 10;
 outer_d = inch_to_mm(2.5);
 // thickness of adapter
 thickness = 3;
+// angle of downspout "T"
+angle = 45;
 
 /* [Attachment] */
 // diameter of screw holes
@@ -49,7 +51,7 @@ module inner(vec) {
                 linear_extrude(total_height)
                     roundrect(vec, downspout_r);
                 translate([downspout_r, 0, insert_d])
-                    rotate([0, 45, 0])
+                    rotate([0, angle, 0])
                         linear_extrude(downspout_w + outer_d)
                             roundrect(vec, downspout_r);
             }
@@ -76,7 +78,7 @@ module screws() {
     translate([x, 0, total_height - screw_offset])
         screw_through();
     translate([downspout_r, 0, insert_d])
-        rotate([0, 45, 0])
+        rotate([0, angle, 0])
             translate([x, 0, downspout_w + outer_d - screw_offset])
                 screw_through();
 }

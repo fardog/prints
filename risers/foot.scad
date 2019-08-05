@@ -5,16 +5,16 @@
 
 use <../lib/utils.scad>;
 
-width = 35;
-depth = 30;
-height = 5;
+width = 40;
+depth = 40;
+height = 7;
 radius = 3;
 
 // foot inset
 foot_offset = 3;
-foot_inset = 2;
+foot_inset = 3;
 
-x_skew = -2;
+x_skew = -3;
 y_skew = 0;
 
 difference() {
