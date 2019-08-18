@@ -31,7 +31,7 @@ module hold() {
     difference () {
         union () {
             translate([0, 0, offset])
-                #cylinder(
+                cylinder(
                     h=hold_depth_mm - offset,
                     d1=inner_diameter_mm,
                     d2=inner_diameter_mm - hold_thickness_mm*2

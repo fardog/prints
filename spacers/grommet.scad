@@ -7,17 +7,16 @@
 part = "outer"; // ["outer", "inner", "both"]
 
 /* [Dimensions] */
-opening_diameter_mm = 15;
+opening_diameter_mm = 12;
 cap_outer_diameter_mm = 25;
 cap_inner_diameter_mm = 20;
-cap_interface_thickness_mm = 2;
-cap_taper_height_mm = 1;
+cap_interface_thickness_mm = 3;
 
 wall_thickness_mm = 2;
 passthrough_thickness_mm = 2;
-passthrough_distance_mm = 1;
+passthrough_distance_mm = 0.2;
 
-clip_mm = 1;
+clip_mm = 2;
 
 /* [Tolerances] */
 cylinder_tolerance_mm = 0.2;
@@ -64,11 +63,11 @@ module outer() {
         rotate([0, 0, -36])
             rotate_extrude(angle=72, convexity=100)
                 translate([clip_x/2, 0, 0])
-                    square([clip_o_mm/2, cap_total_height]);
+                    square([clip_o_mm/3, cap_total_height]);
         rotate([0, 0, 144])
             rotate_extrude(angle=72, convexity=100)
                 translate([clip_x/2, 0, 0])
-                    square([clip_o_mm/2, cap_total_height]);
+                    square([clip_o_mm/3, cap_total_height]);
 
     }
 }
