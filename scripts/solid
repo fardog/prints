@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+import os
+import sys
+
+from argparse import ArgumentParser
+from importlib import import_module
+
+from solid import scad_render
+
+from typing import List, Tuple
+
+
+def split_args(args: List[str]) -> Tuple[List[str], List[str]]:
+    try:
+        idx = args.index("--")
+        return args[0:idx], args[idx + 1 :]
+    except ValueError:
+        pass
+
+    return args, []
+
+
+def main():
+    raw_args, raw_params = split_args(sys.argv[1:])
+
+    parser = ArgumentParser(description="Build a solidpython definition.")
+    parser.add_argument("module", nargs="+")
+    args = parser.parse_args(args=raw_args)
+
+    mod = import_module("prints.{}".format(args.module[0]))
+
+    param_parser = ArgumentParser(description=mod.__doc__)
+    for k, v in mod.Params.__annotations__.items():
+        param_parser.add_argument("--{}".format(k), type=v)
+
+    params = mod.Params()
+    for k, v in param_parser.parse_args(raw_params).__dict__.items():
+        if v is not None:
+            setattr(params, k, v)
+
+    sys.stdout.write(scad_render(mod.main(params)))
+
+
+if __name__ == "__main__":
+    sys.path.append(os.path.realpath(os.path.join(os.path.dirname(__file__), "..")))
+    main()

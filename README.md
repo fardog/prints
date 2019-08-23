@@ -10,6 +10,27 @@ gcode is generated for a [Prusa i3 MK3][i3], from my [slic3r-presets][];
 settings are written into the gcode, so inspect the end of the files to see what
 settings they use.
 
+## Generating SCAD
+
+There is a hacked together script for generating scad files; to use:
+
+1. Install Python 3.6+
+1. Install requirements from `requirements.txt`
+1. Create a new module in the `prints` directory, following the module format
+   described below.
+1. Run `./scripts/solid module_name -- --param_override=value`
+
+### Module Format
+
+A module must export the following:
+
+1. A `Params` class, which includes Python 3 type annotations for each parameter
+1. A `main(params: Params)` function, which takes an instantiated `Prams` class
+   and returns a `solidpython` object
+
+Until this is better documented, see the [rug corner](./prints/rug_corner)
+module.
+
 ## License
 
 [Creative Commons Attribution (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/)
