@@ -25,6 +25,7 @@ def main():
 
     parser = ArgumentParser(description="Build a solidpython definition.")
     parser.add_argument("module", nargs="+")
+    parser.add_argument("--fn", type=int, default=20)
     args = parser.parse_args(args=raw_args)
 
     mod = import_module("prints.{}".format(args.module[0]))
@@ -38,6 +39,7 @@ def main():
         if v is not None:
             setattr(params, k, v)
 
+    sys.stdout.write("$fn = {};\n".format(args.fn))
     sys.stdout.write(scad_render(mod.main(params)))
 
 
