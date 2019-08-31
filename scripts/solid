@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 import os
 import sys
-
+from typing import List, Tuple
 from argparse import ArgumentParser
 from importlib import import_module
 
 from solid import scad_render
-
-from typing import List, Tuple
 
 
 def split_args(args: List[str]) -> Tuple[List[str], List[str]]:
@@ -21,6 +19,8 @@ def split_args(args: List[str]) -> Tuple[List[str], List[str]]:
 
 
 def main():
+    from prints import check_module
+
     raw_args, raw_params = split_args(sys.argv[1:])
 
     parser = ArgumentParser(description="Build a solidpython definition.")
@@ -29,6 +29,7 @@ def main():
     args = parser.parse_args(args=raw_args)
 
     mod = import_module("prints.{}".format(args.module[0]))
+    check_module(mod)
 
     param_parser = ArgumentParser(description=mod.__doc__)
     for k, v in mod.Params.__annotations__.items():

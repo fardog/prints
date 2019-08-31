@@ -1,7 +1,9 @@
 from solid import square, linear_extrude, difference, translate, union, rotate
 
+from . import ParamsBase
 
-class Params(object):
+
+class Params(ParamsBase):
     thickness: float = 1
     inset_depth: float = 0.4
     inset_width: float = 52
