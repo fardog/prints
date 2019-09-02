@@ -12,11 +12,6 @@ class ParamsMeta(type):
     def __new__(self, name, bases, classdict):
         keys = [key for key in classdict.keys() if not key.startswith("__")]
 
-        annotations = classdict.get("__annotations__", {})
-        for key in keys:
-            if key not in annotations:
-                raise RuntimeError("invalid params: `{}` not annotated".format(key))
-
         classdict["__ordered__"] = keys
 
         return type.__new__(self, name, bases, classdict)
