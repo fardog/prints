@@ -26,9 +26,12 @@ def main():
     parser = ArgumentParser(description="Build a solidpython definition.")
     parser.add_argument("module", nargs="+")
     parser.add_argument("--fn", type=int, default=20)
+    parser.add_argument("--out", type=str)
+    parser.add_argument("--out-default", action="store_true")
     args = parser.parse_args(args=raw_args)
 
-    mod = import_module("prints.{}".format(args.module[0]))
+    mod_name = args.module[0]
+    mod = import_module("prints.{}".format(mod_name))
     check_module(mod)
 
     param_parser = ArgumentParser(description=mod.__doc__)
@@ -40,8 +43,30 @@ def main():
         if v is not None:
             setattr(params, k, v)
 
-    sys.stdout.write("$fn = {};\n".format(args.fn))
-    sys.stdout.write(scad_render(mod.main(params)))
+    outfile = sys.stdout
+    if args.out_default:
+        outfile_dir = os.path.realpath(
+            os.path.join(
+                os.path.dirname(__file__),
+                "..",
+                "out",
+                mod_name,
+            )
+        )
+        try:
+            os.mkdir(outfile_dir)
+        except FileExistsError:
+            pass
+        outfile_path = os.path.join(outfile_dir, f"{mod_name}.scad")
+        outfile = open(outfile_path, "w+")
+    elif args.out:
+        outfile = open(args.out, "w+")
+
+    outfile.write("$fn = {};\n".format(args.fn))
+    outfile.write(scad_render(mod.main(params)))
+
+    if outfile != sys.stdout:
+        outfile.close()
 
 
 if __name__ == "__main__":
